@@ -22,7 +22,7 @@ public class Convidado {
 	public String getNomeconvidado() {
 		return nomeConvidado;
 	}
-	public void setNomeconvidado(String nomeconvidado) {
+	public void setNomeConvidado(String nomeconvidado) {
 		this.nomeConvidado = nomeconvidado;
 	}
 	public Evento getEvento() {
