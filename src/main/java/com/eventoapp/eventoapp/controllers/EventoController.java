@@ -22,8 +22,7 @@ public class EventoController {
 	private EventoRepository er;
 	@Autowired
 	private ConvidadoRepository cr;
-	
-	
+		
 	@RequestMapping(value="/cadastrarEvento", method=RequestMethod.GET)
 	public String form() {
 		return "evento/formEvento";
@@ -41,16 +40,6 @@ public class EventoController {
 		mv.addObject("eventos", eventos);
 		return mv;
 	}
-	
-	/*@RequestMapping("/{codigo}")
-	public ModelAndView detalhesEvento(@PathVariable("codigo") long codigo) {
-		Evento evento = er.findByCodigo(codigo);
-		ModelAndView mv = new ModelAndView("detalhesEvento");
-		mv.addObject("evento", evento);
-		return mv;
-	}
-	*/
-	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ModelAndView detalhesEvento(@PathVariable("id") long id){
 		Evento evento = er.findById(id);
@@ -59,6 +48,13 @@ public class EventoController {
 		Iterable<Convidado>convidados = cr.findByEvento(evento);
 		mv.addObject("convidados", convidados);
 		return mv;
+	}
+	@RequestMapping("/deletarEvento")
+	public String deletarEvento(long id) {
+		Evento evento = er.findById(id);
+		er.delete(evento);
+		return "redirect:/eventos";
+	
 	}
 	@RequestMapping(value="/{id}", method=RequestMethod.POST)
 	public String detalhesEventoPost(@PathVariable("id") long id,@Valid Convidado convidado, BindingResult result, RedirectAttributes attributes) {
@@ -72,4 +68,15 @@ public class EventoController {
 		attributes.addFlashAttribute("mensagem", "Convidado adicionado com sucesso!");
 		return "redirect:/{id}";
 	}
+	@RequestMapping("/deletarConvidado")
+	public String deletarConvidado(String rg){
+		Convidado convidado = cr.findByRg(rg);
+		cr.delete(convidado);
+		Evento evento = convidado.getEvento();
+		long idLong = evento.getId();
+		String id = "" + idLong;
+		return "redirect:/" + id;
+	}
+	
+	
 }
