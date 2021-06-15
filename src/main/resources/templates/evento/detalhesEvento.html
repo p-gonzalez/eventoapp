@@ -35,13 +35,21 @@
 				Horário<span th:text="${evento.horario}"></span>
 			</p>
 		</div>
+		<!--  <th:block th:include="mensagemValidacao"></th:block>-->
 		<form method="post">
-			Nome:<input type="text" value="" name="nomeConvidado" /> RG:<input
-				type="text" value="" name="rg" />
+			Nome:<input type="text" name="nomeConvidado" />
+			RG:<input type="text"  name="rg" />
 			<button type="submit" class="waves-effect waves-light btn">Adicionar</button>
-
 		</form>
 	</div>
+	<h5>Lista convidado</h5>
+	<!-- <div class="container" th:each="convidado : ${convidados}">
+	<div class="row">
+			<p><span th:text="${convidado.nomeConvidado}"></span></p>
+			<p><span th:text="${convidado.rg}"></span></p>
+	</div>
+	</div>
+ -->
 </body>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
